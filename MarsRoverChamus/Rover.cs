@@ -4,93 +4,106 @@ namespace MarsRoverChamus
 {
     class Rover
     {
-        private string heading;
+        private string Heading { get; set; }
         private int degree;
-        private int x;
-        private int y;
+        private Coordinate Coordinate;
 
-        public Rover(int x, int y, string heading)
+        //[Constructor]
+        public Rover(Coordinate coordinate, string heading)
         {
-            this.heading = heading;
             degree = HeadingToDegree(heading);
-            this.x = x;
-            this.y = y;
-
-
+            Coordinate = coordinate;
         }
-        public static Rover DeployRover(int xLimit, int yLimit)
+
+        //[Step 2: Creates Rover Object]
+        public static Rover DeployRover(Coordinate plateauCoord)
         {
-            char comma = ',';
+            //[Creating a new Coordinate Object and heading string for the Rover Object]
             View.ConsoleDeployInstructions();
-            string[] nasaSet = Console.ReadLine().Split(comma);
-            int x = int.Parse(nasaSet[0]);
-            int y = int.Parse(nasaSet[1]);
-            string heading = nasaSet[2].ToUpper();
-            if (x > xLimit || y > yLimit || x < 0 || y < 0)
+            string[] input = Console.ReadLine().Split(' ');
+            bool xBool = int.TryParse(input[0].ToString(), out int x);
+            bool yBool = int.TryParse(input[1].ToString(), out int y);
+            if (xBool == false || yBool == false)
+            {
+                throw new RoverFellOffThePlateauException();
+            }
+            Coordinate coordinate = new Coordinate(x, y);
+            string heading = input[2].ToString().ToUpper();
+
+            //[Testing for valid start Coordinate]
+            if (coordinate.x > plateauCoord.x || coordinate.y > plateauCoord.y || coordinate.x < 0 || coordinate.y < 0)
             {
                 throw new RoverFellOffThePlateauException();
             }
             else
             {
-                Rover rob = new Rover(x, y, heading);
+                //[New Rover]
+                Rover rob = new Rover(coordinate, heading);
                 return rob;
             }
         }
-        public static void MoveRover(Rover rob, int xLimit, int yLimit)
+
+        //[Step 3: Moves Rover across Plateau based on input]
+        public static void MoveRover(Rover rob, Coordinate plateauCoord)
         {
-            rob.degree = HeadingToDegree(rob.heading);
+
             View.ConsoleMoveInstructions();
             string input = Console.ReadLine().ToUpper();
             char[] nasaCommand = input.ToCharArray();
             for (int i = 0; i < nasaCommand.Length; i++)
             {
                 if (nasaCommand[i] == 'L')
-                {
+                {//[Turn Left]
                     rob.degree = rob.degree - 90;
                 }
                 else if (nasaCommand[i] == 'R')
-                {
+                {//[Turn Right]
                     rob.degree = rob.degree + 90;
                 }
                 else if (nasaCommand[i] == 'M')
-                {
+                {//[Move 1 in the Direction rover is facing]
                     switch (rob.degree)
                     {
                         case 0:
-                            rob.y = rob.y + 1;
+                            rob.Coordinate.y = rob.Coordinate.y + 1;
                             break;
                         case 360:
-                            rob.y = rob.y + 1;
+                            rob.Coordinate.y = rob.Coordinate.y + 1;
                             break;
                         case 90:
-                            rob.x = rob.x + 1;
+                            rob.Coordinate.x = rob.Coordinate.x + 1;
                             break;
                         case 180:
-                            rob.y = rob.y - 1;
+                            rob.Coordinate.y = rob.Coordinate.y - 1;
                             break;
                         case 270:
-                            rob.x = rob.x - 1;
+                            rob.Coordinate.x = rob.Coordinate.x - 1;
                             break;
                         default:
-                            Console.WriteLine("Invalid Command #" + i + " - " + nasaCommand[i]);
+                            Console.WriteLine("Invalid Command #" + i + 1 + " - " + nasaCommand[i]);
                             break;
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Invalid Command #" + i + " -" + nasaCommand[i]);
+                    Console.WriteLine("Invalid Command #" + i + 1 + " -" + nasaCommand[i]);
                 }
             }
-            rob.heading = rob.DegreeToHeading(rob);
-            if (rob.x > xLimit || rob.y > yLimit || rob.x < 0 || rob.y < 0)
+            //[Overwrite original heading]
+            rob.Heading = rob.DegreeToHeading(rob);
+            //[Test for valid Coordinate]
+            if (rob.Coordinate.x > plateauCoord.x || rob.Coordinate.y > plateauCoord.y || rob.Coordinate.x < 0 || rob.Coordinate.y < 0)
             {
+                //[This throw will terminate the mission]
                 throw new RoverFellOffThePlateauException();
             }
             else
             {
-                Console.WriteLine(rob.x + "," + rob.y + " " + rob.heading);
+                Console.WriteLine(rob.Coordinate.x + "," + rob.Coordinate.y + " " + rob.Heading);
             }
         }
+
+        //[Method to translate N,S,E,W value to a degree value out of 360]
         private static int HeadingToDegree(string heading)
         {
             int degree;
@@ -116,6 +129,8 @@ namespace MarsRoverChamus
             }
             return degree;
         }
+
+        //[Method to translate the degree value to a N,S,E,W value]
         private string DegreeToHeading(Rover rob)
         {
             if (rob.degree > 360)
@@ -149,6 +164,7 @@ namespace MarsRoverChamus
                 }
             }
         }
+
 
     }
 }

@@ -6,64 +6,43 @@ namespace MarsRoverChamus
     {
         static void Main()
         {
-            char delimiter = ',';
             bool mission = true;
-            string plate = PlateauSize();
-            string[] plateau = plate.Split(delimiter);
-            bool xTrue = int.TryParse(plateau[0], out int x);
-            bool yTrue = int.TryParse(plateau[1], out int y);
-            if (xTrue == true && yTrue == true)
-            {
-                Console.WriteLine(x + ", " + y);
-            }
-            else
-            {
-                Console.WriteLine("Try Again");
-                Main();
-            }
+            //[Step 1: Setting the Dimensions of the Plateau]
+            Coordinate plateauCoord = Coordinate.CalculatePlateau();
+
+            //[Loop] I placed this in a loop to give NASA the option to deploy as many Rovers as needed.
             while (mission == true)
             {
-                try
-                {
-                    Rover rob = Rover.DeployRover(x, y);
-                    Rover.MoveRover(rob, x, y);
-                }
-                catch (RoverFellOffThePlateauException)
-                {
+                //[Step 2: DeployRover Method will build a Rover Object]
+                Rover rob = Rover.DeployRover(plateauCoord);
 
-                }
+                //[Step 3: MoveRover Method takes input data, and changes the Rover's Direction/Heading and Coordinates on the Plateau]
+                Rover.MoveRover(rob, plateauCoord);
 
-                Console.WriteLine("Would you like to deploy another Rover?");
-                string reply = Console.ReadLine().ToLower();
-                if (reply == "y" || reply == "yes")
-                {
-                    mission = true;
-                }
-                else if (reply == "n" || reply == "no")
-                {
-                    Console.WriteLine("Mission Aborted");
-                    mission = false;
-                }
-                else
-                {
-                    Console.WriteLine("Mission Aborted: Did not compute");
-                    mission = false;
-                }
+                //[Continue the Loop or End the Loop]
+                mission = Continue(mission);
             }
         }
-        public static string PlateauSize()
+        public static bool Continue(bool mission)
         {
-            Console.WriteLine("Give the dimensions of the plateau");
-            Console.WriteLine("Use the following format: x,y");
-            string dimensions = Console.ReadLine();
-            if (dimensions.Length != 3)
+            Console.WriteLine("Would you like to deploy another Rover?");
+            string reply = Console.ReadLine().ToLower();
+            if (reply == "y" || reply == "yes")
             {
-                return PlateauSize();
+                mission = true;
+            }
+            else if (reply == "n" || reply == "no")
+            {
+                Console.WriteLine("Mission Aborted");
+                mission = false;
             }
             else
             {
-                return dimensions;
+                Console.WriteLine("Mission Aborted: Did not compute");
+                mission = false;
             }
+            return mission;
         }
     }
 }
+

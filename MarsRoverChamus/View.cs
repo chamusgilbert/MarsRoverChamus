@@ -4,6 +4,15 @@ namespace MarsRoverChamus
 {
     class View
     {
+        //[This contains directions for user input in Step 2]
+        public static void ConsoleDeployInstructions()
+        {
+            Console.WriteLine("Set the coordinates and heading on the Plateau where you would like to set the Rover");
+            Console.WriteLine("First the X coordinate, then Y coordinate, then N, S, E, or W");
+            Console.WriteLine("Separate by spaces");
+        }
+
+        //[This contains directions for user input in Step 3]
         public static void ConsoleMoveInstructions()
         {
             Console.WriteLine("Enter Commands to move the Rover around the Plateau");
@@ -12,12 +21,8 @@ namespace MarsRoverChamus
             Console.WriteLine("Command 'M' will move the rover 1 coordinate in the direction it is facing");
             Console.WriteLine("No spaces or punctuation");
         }
-        public static void ConsoleDeployInstructions()
-        {
-            Console.WriteLine("Set the coordinates and heading on the Plateau where you would like to set the Rover");
-            Console.WriteLine("First the X coordinate, then Y coordinate, then N, S, E, or W");
-            Console.WriteLine("Separate each character by comma's");
-        }
+
+        //[Original Code Instructions: *Not used for this program*]
         public static void CodeInstructions()
         {
             /*PROBLEM ONE: MARS ROVERS
