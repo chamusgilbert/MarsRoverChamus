@@ -1,0 +1,14 @@
+C:\Users\Grand Circus Student\source\repos\MarsRoverChamus\MarsRoverChamus\bin\Debug\MarsRoverChamus.exe.config
+C:\Users\Grand Circus Student\source\repos\MarsRoverChamus\MarsRoverChamus\bin\Debug\MarsRoverChamus.exe
+C:\Users\Grand Circus Student\source\repos\MarsRoverChamus\MarsRoverChamus\bin\Debug\MarsRoverChamus.pdb
+C:\Users\Grand Circus Student\source\repos\MarsRoverChamus\MarsRoverChamus\obj\Debug\MarsRoverChamus.csprojResolveAssemblyReference.cache
+C:\Users\Grand Circus Student\source\repos\MarsRoverChamus\MarsRoverChamus\obj\Debug\MarsRoverChamus.csproj.CoreCompileInputs.cache
+C:\Users\Grand Circus Student\source\repos\MarsRoverChamus\MarsRoverChamus\obj\Debug\MarsRoverChamus.exe
+C:\Users\Grand Circus Student\source\repos\MarsRoverChamus\MarsRoverChamus\obj\Debug\MarsRoverChamus.pdb
+C:\Users\Grand Circus Student\source\repos\Rover-master\MarsRoverChamus\bin\Debug\MarsRoverChamus.exe.config
+C:\Users\Grand Circus Student\source\repos\Rover-master\MarsRoverChamus\bin\Debug\MarsRoverChamus.exe
+C:\Users\Grand Circus Student\source\repos\Rover-master\MarsRoverChamus\bin\Debug\MarsRoverChamus.pdb
+C:\Users\Grand Circus Student\source\repos\Rover-master\MarsRoverChamus\obj\Debug\MarsRoverChamus.csprojResolveAssemblyReference.cache
+C:\Users\Grand Circus Student\source\repos\Rover-master\MarsRoverChamus\obj\Debug\MarsRoverChamus.csproj.CoreCompileInputs.cache
+C:\Users\Grand Circus Student\source\repos\Rover-master\MarsRoverChamus\obj\Debug\MarsRoverChamus.exe
+C:\Users\Grand Circus Student\source\repos\Rover-master\MarsRoverChamus\obj\Debug\MarsRoverChamus.pdb
